@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer(){
     return(
-        <h6>All Copyrights reserved 2020</h6>
+        <h6>Sample copyright content goes here.</h6>
     );
 }
 

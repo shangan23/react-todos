@@ -5,7 +5,15 @@ class Todos extends React.Component {
 
     render() {
         return this.props.todos.map((todo)=>(
-            <TodoItem todo={todo} key={todo.id} deleteTodo={this.props.deleteTodo} toggelComplete={this.props.toggelComplete}/>
+            <TodoItem 
+            cancelEdit={this.props.cancelEdit} 
+            editItem={this.props.editItem} 
+            todo={todo} 
+            key={todo.id} 
+            deleteTodo={this.props.deleteTodo} 
+            editTodo={this.props.editTodo} 
+            updateTodo={this.props.updateTodo}
+            toggelComplete={this.props.toggelComplete}/>
         ));
     }
 
