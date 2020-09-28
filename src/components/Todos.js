@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 class Todos extends React.Component {
 
     render() {
-        const todoItem = this.props.todos.map((todo) => (
+        return this.props.todos.map((todo) => (
             <TodoItem
                 cancelEdit={this.props.cancelEdit}
                 editItem={this.props.editItem}
@@ -15,7 +15,6 @@ class Todos extends React.Component {
                 updateTodo={this.props.updateTodo}
                 toggelComplete={this.props.toggelComplete} />
         ));
-        return <div className="todoContainer">{todoItem}</div>;
     }
 
 }

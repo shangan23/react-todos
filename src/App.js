@@ -77,14 +77,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <Headers addTodo={this.addTodo} />
-        <Todos
-          cancelEdit={this.cancelEdit}
-          editItem={this.state.editItem}
-          editTodo={this.editTodo}
-          updateTodo={this.updateTodo}
-          deleteTodo={this.deleteTodo}
-          todos={this.state.todos}
-          toggelComplete={this.toggelComplete} />
+        <div className="container">
+          <Todos
+            cancelEdit={this.cancelEdit}
+            editItem={this.state.editItem}
+            editTodo={this.editTodo}
+            updateTodo={this.updateTodo}
+            deleteTodo={this.deleteTodo}
+            todos={this.state.todos}
+            toggelComplete={this.toggelComplete} />
+        </div>
         <Footer />
       </div>
     );

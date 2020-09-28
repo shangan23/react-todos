@@ -1,5 +1,6 @@
 import React from 'react';
 import AddTodo from '../AddTodo';
+import GoogleSSO from '../GoogleSSO';
 
 function Header(props) {
     return (
@@ -12,6 +13,7 @@ function Header(props) {
                 </span>
                 <div className="clear"></div>
             </div>
+            <GoogleSSO />
             <AddTodo addTodo={props.addTodo} />
         </React.Fragment>
     );
