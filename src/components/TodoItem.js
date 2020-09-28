@@ -8,10 +8,8 @@ class TodoItem extends React.Component {
 
     getStyle = () => {
         return {
-            background: '#f7f7f7',
-            padding: '5px',
-            textAlign: 'left',
-            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
+            fontSize: this.props.todo.completed ? 'large':'smaller',
+            textDecoration: this.props.todo.completed ? 'line-through' : 'none',
         }
     }
 
@@ -21,26 +19,29 @@ class TodoItem extends React.Component {
 
     render() {
         const { id } = this.props.todo;
-        let todoTitle = this.state.title,
+        let todoTitle = <React.Fragment>
+            <input value={id} onChange={this.props.toggelComplete.bind(this, id)} type="checkbox" />
+            {' '}{this.state.title}
+        </React.Fragment>,
             todoAction = <React.Fragment>
-                <button onClick={this.props.editTodo.bind(this, id)}>Edit</button>
+                <button onClick={this.props.editTodo.bind(this, id)}>Edit</button>{' '}
                 <button onClick={this.props.deleteTodo.bind(this, id)}>Delete</button>
             </React.Fragment>;
 
         if (this.props.editItem && id === this.props.editItem[0].id) {
-            todoTitle = <input type="text" value={this.state.title} onChange={this.onChange} />
+            todoTitle = <React.Fragment>
+                <input type="text" value={this.state.title} onChange={this.onChange} />
+            </React.Fragment>
             todoAction = <React.Fragment>
-                <button onClick={this.props.updateTodo.bind(this, this.state.title, id)}>Update</button>
+                <button onClick={this.props.updateTodo.bind(this, this.state.title, id)}>Update</button>{' '}
                 <button onClick={this.props.cancelEdit}>Cancel</button>
             </React.Fragment>
         }
         return (
-            <div style={this.getStyle()}>
-                <span>
-                    <input value={id} onChange={this.props.toggelComplete.bind(this, id)} type="checkbox" />
-                </span>
-                <span> {todoTitle}</span>
-                <span>{todoAction} </span>
+            <div className="todo">
+                <div  style={this.getStyle()} className="title">{todoTitle}</div>
+                <div className="action">{todoAction} </div>
+                <div className="clear"></div>
             </div>
         );
     }

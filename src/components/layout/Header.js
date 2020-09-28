@@ -4,11 +4,15 @@ import AddTodo from '../AddTodo';
 function Header(props) {
     return (
         <React.Fragment>
-            <div><h1>Simple Todo with React</h1></div>
-            <div style={{display: 'flex'}}>
-            <div>Hey there! Welcome back.</div>
-            <div><AddTodo addTodo={props.addTodo} /></div>
+            <div className="header">
+                <span className="title">Simple Todo with React</span>
+                <span className="action">
+                    Welcome back Shankar!
+                    <a href="#">Logout</a>
+                </span>
+                <div className="clear"></div>
             </div>
+            <AddTodo addTodo={props.addTodo} />
         </React.Fragment>
     );
 }

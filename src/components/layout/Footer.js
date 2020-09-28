@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer(){
     return(
-        <h6>Sample copyright content goes here.</h6>
+        <div className="footer">Sample copyright content goes here.</div>
     );
 }
 

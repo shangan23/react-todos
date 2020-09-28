@@ -23,12 +23,12 @@ class AddTodo extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <p>
+            <div className="todoform">
+                <form onSubmit={this.onSubmit}>
                     <input type="text" name="title" onChange={this.onChange} value={this.state.title} />
                     <input type="submit" value="Add Todo" />
-                </p>
-            </form>
+                </form>
+            </div>
         );
     }
 }

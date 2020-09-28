@@ -10,7 +10,19 @@ class App extends React.Component {
     super();
     this.state = {
       todos: [
-        { id: uuidv4(), title: 'Morning Gym at 5am', completed: false },
+        { id: uuidv4(), title: 'Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am', completed: false },
+        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
+        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
+        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
+        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
+        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
+        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
+        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
+        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
+        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
+        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
+        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
+        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
         { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
         { id: uuidv4(), title: 'Snacks at 11am', completed: false },
         { id: uuidv4(), title: 'Lunch at 1pm', completed: false }
