@@ -1,4 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Follow this page to [set up react project without "Create React App"](https://github.com/web-slate/beginner-react-app-guide/blob/master/simple-banking-app/docs/index.md)
 
 ## React TodoList 
 [Click here for Demo](https://shangan23.github.io/react-todos/)
