@@ -8,38 +8,47 @@ class GoogleSSO extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = { 'googleData': null }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         const script = document.createElement("script");
         script.src = "https://apis.google.com/js/api.js";
         script.async = true;
+        script.onload = "this.onload=function(){};this.initiateSignIn()"
+        script.onreadystatechange = "if (this.readyState === 'complete') this.onload()"
         document.body.appendChild(script);
     }
 
     initClient = () => {
-        {
-            // Retrieve the discovery document for version 3 of Google Drive API.
-            // In practice, your app can retrieve one or more discovery documents.
-            var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
-
-            // Initialize the gapi.client object, which app uses to make API requests.
-            // Get API key and client ID from API Console.
-            // 'scope' field specifies space-delimited list of access scopes.
-            gapi.client.init({
-                'apiKey': 'AIzaSyCPN4HXCPIFRq-FeJPHKAkxhEymjCp8A3g',
-                'clientId': '1008276052670-hs7djrmufj7numtkgflt5k7131nk0ms7.apps.googleusercontent.com',
-                'discoveryDocs': [discoveryUrl],
-                'scope': SCOPE
-            }).then(function () {
-                GoogleAuth = gapi.auth2.getAuthInstance();
-                var user = GoogleAuth.currentUser.get();
-                var isAuthorized = user.hasGrantedScopes(SCOPE);
-                console.log(GoogleAuth);
-
-            });
+        const updateSigninStatus = () => {
+            this.setSigninStatus();
         }
+        var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+        gapi.client.init({
+            'apiKey': 'AIzaSyCPN4HXCPIFRq-FeJPHKAkxhEymjCp8A3g',
+            'clientId': '1008276052670-kpvq523j2009g7016lsql3s0t1kvhkl7.apps.googleusercontent.com',
+            'discoveryDocs': [discoveryUrl],
+            'scope': SCOPE
+        }).then(function () {
+            GoogleAuth = gapi.auth2.getAuthInstance();
+            GoogleAuth.signIn();
+            // Listen for sign-in state changes.
+            GoogleAuth.isSignedIn.listen(updateSigninStatus);
+            // Handle initial sign-in state. (Determine if user is already signed in.)
+        });
     }
+
+    setSigninStatus() {
+        GoogleAuth = gapi.auth2.getAuthInstance();
+        var user = GoogleAuth.currentUser.get();
+        if(!user)
+            GoogleAuth.signIn();
+        var isAuthorized = user.hasGrantedScopes(SCOPE);
+        console.log('GoogleAuth.isAuthorized.get()', isAuthorized);
+    }
+
+   
 
     initiateSignIn = () => {
         gapi.load('client:auth2', this.initClient);

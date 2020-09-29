@@ -8,12 +8,12 @@ function Header(props) {
             <div className="header">
                 <span className="title">Simple Todo with React</span>
                 <span className="action">
-                    Welcome back Shankar!
-                    <a href="#">Logout</a>
+                    Hey there, Welcome back!
+                    {/*<a href="#">Logout</a>*/}
                 </span>
                 <div className="clear"></div>
             </div>
-            <GoogleSSO />
+            {/*<GoogleSSO />*/}
             <AddTodo addTodo={props.addTodo} />
         </React.Fragment>
     );

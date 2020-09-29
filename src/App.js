@@ -9,34 +9,40 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: [
-        { id: uuidv4(), title: 'Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am Morning Gym at 5am', completed: false },
-        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
-        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
-        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
-        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
-        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
-        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
-        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
-        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
-        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
-        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
-        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
-        { id: uuidv4(), title: 'Lunch at 1pm', completed: false },
-        { id: uuidv4(), title: 'Morning Breakfast 8am', completed: false },
-        { id: uuidv4(), title: 'Snacks at 11am', completed: false },
-        { id: uuidv4(), title: 'Lunch at 1pm', completed: false }
-      ],
+      todos: [],
       editItem: null
     };
+  }
+
+  reloadTodos = () => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(json => {
+        this.setState({ todos: json });
+      });
+  }
+
+  componentWillMount() {
+    this.reloadTodos();
   }
 
   toggelComplete = (id) => {
     this.setState({
       editItem: null,
       todos: [...this.state.todos.map((todo) => {
-        if (todo.id === id)
+        if (todo.id === id) {
+          fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+              completed: !todo.completed,
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          })
+            .then((response) => response.json());
           todo.completed = !todo.completed
+        }
         return todo;
       })]
     });
@@ -48,6 +54,9 @@ class App extends React.Component {
         id !== todo.id))
       ]
     });
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      method: 'DELETE',
+    })
   }
 
   editTodo = (id) => {
@@ -56,6 +65,15 @@ class App extends React.Component {
 
   addTodo = (title) => {
     this.setState({ todos: [...this.state.todos, { id: uuidv4(), title, completed: false }] });
+    fetch('https://jsonplaceholder.typicode.com/todos', {
+      method: 'POST',
+      body: JSON.stringify({ id: uuidv4(), title, completed: false }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
   }
 
   updateTodo = (title, id) => {
@@ -67,6 +85,18 @@ class App extends React.Component {
       })],
       editItem: null
     });
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: id,
+        title
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
   }
 
   cancelEdit = () => {
