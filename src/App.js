@@ -1,7 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 import Headers from './components/layout/Header';
+import About from './components/pages/About';
 import Footer from './components/layout/Footer';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -64,7 +67,6 @@ class App extends React.Component {
   }
 
   addTodo = (title) => {
-    this.setState({ todos: [...this.state.todos, { id: uuidv4(), title, completed: false }] });
     fetch('https://jsonplaceholder.typicode.com/todos', {
       method: 'POST',
       body: JSON.stringify({ id: uuidv4(), title, completed: false }),
@@ -73,7 +75,7 @@ class App extends React.Component {
       },
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
+      .then((json) => this.setState({ todos: [...this.state.todos, json] }))
   }
 
   updateTodo = (title, id) => {
@@ -106,18 +108,26 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Headers addTodo={this.addTodo} />
-        <div className="container">
-          <Todos
-            cancelEdit={this.cancelEdit}
-            editItem={this.state.editItem}
-            editTodo={this.editTodo}
-            updateTodo={this.updateTodo}
-            deleteTodo={this.deleteTodo}
-            todos={this.state.todos}
-            toggelComplete={this.toggelComplete} />
-        </div>
-        <Footer />
+        <Router>
+          <Headers />
+          <Route exact path="/" render={(props) => (
+            <React.Fragment>
+              <AddTodo addTodo={this.addTodo} />
+              <div className="container">
+                <Todos
+                  cancelEdit={this.cancelEdit}
+                  editItem={this.state.editItem}
+                  editTodo={this.editTodo}
+                  updateTodo={this.updateTodo}
+                  deleteTodo={this.deleteTodo}
+                  todos={this.state.todos}
+                  toggelComplete={this.toggelComplete} />
+              </div>
+            </React.Fragment>
+          )} />
+          <Route path="/about" component={About}/>
+          <Footer />
+        </Router>
       </div>
     );
   }

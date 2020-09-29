@@ -1,20 +1,23 @@
 import React from 'react';
-import AddTodo from '../AddTodo';
-import GoogleSSO from '../GoogleSSO';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header() {
     return (
         <React.Fragment>
             <div className="header">
-                <span className="title">Simple Todo with React</span>
+                <span className="title">
+                    Simple Todo with React
+                    <span className="link">
+                        <Link className="a" to="/">Home</Link>
+                        <Link className="a" to="/about">About</Link>
+                    </span>
+                </span>
                 <span className="action">
                     Hey there, Welcome back!
-                    {/*<a href="#">Logout</a>*/}
                 </span>
                 <div className="clear"></div>
             </div>
             {/*<GoogleSSO />*/}
-            <AddTodo addTodo={props.addTodo} />
         </React.Fragment>
     );
 }

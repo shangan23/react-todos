@@ -21,8 +21,10 @@
   font-size:small
 }
 
-.header .action a{
-  padding:5px
+.link .a{
+  font-size: small;
+  color: white;
+  padding: 15px;
 }
 
 .clear{
@@ -85,4 +87,11 @@
 .container{
   height: calc(81vh - 20px);
   overflow:auto;
+}
+
+.about{
+    text-align:left;
+    height: calc(81vh - 20px);
+    overflow:auto;
+    padding:15px;
 }
