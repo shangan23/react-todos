@@ -8,8 +8,8 @@ function Header() {
                 <span className="title">
                     Simple Todo with React
                     <span className="link">
-                        <Link className="a" to="/">Home</Link>
-                        <Link className="a" to="/about">About</Link>
+                        <Link className="a" to="/react-todos/">Home</Link>
+                        <Link className="a" to="/react-todos/about">About</Link>
                     </span>
                 </span>
                 <span className="action">
