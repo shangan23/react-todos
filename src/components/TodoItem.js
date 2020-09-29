@@ -8,7 +8,7 @@ class TodoItem extends React.Component {
 
     getStyle = () => {
         return {
-            fontSize: this.props.todo.completed ? 'large':'smaller',
+            fontSize: this.props.todo.completed ? 'large' : 'smaller',
             textDecoration: this.props.todo.completed ? 'line-through' : 'none',
         }
     }
@@ -19,8 +19,13 @@ class TodoItem extends React.Component {
 
     render() {
         const { id } = this.props.todo;
+        const checkboxProps = {
+            value: id,
+            checked: this.props.todo.completed ? true : false,
+            onChange: this.props.toggelComplete.bind(this, id)
+        }
         let todoTitle = <React.Fragment>
-            <input value={id} onChange={this.props.toggelComplete.bind(this, id)} type="checkbox" />
+            <input {...checkboxProps} type="checkbox" />
             {' '}{this.state.title}
         </React.Fragment>,
             todoAction = <React.Fragment>
@@ -39,7 +44,7 @@ class TodoItem extends React.Component {
         }
         return (
             <div className="todo">
-                <div  style={this.getStyle()} className="title">{todoTitle}</div>
+                <div style={this.getStyle()} className="title">{todoTitle}</div>
                 <div className="action">{todoAction} </div>
                 <div className="clear"></div>
             </div>
