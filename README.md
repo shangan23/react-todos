@@ -14,7 +14,7 @@ This project is an experimental and below are the learnings:
 - `Prop Drilling` - Passing parameter to parent component using bind(`this`,`<parameters>`)
 - `Router` (react-router-dom) - BrowserRouter, Route(path, component, render), Link(to)
 - `PropTypes` (prop-types) - Adding validation to the component props
-- 
+- `Short Circuiting` - react jsx conditional logic
 
 ### Javascript 
 
