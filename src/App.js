@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-import Headers from './components/layout/Header';
+import Header from './components/layout/Header';
 import About from './components/pages/About';
 import Footer from './components/layout/Footer';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +13,7 @@ class App extends React.Component {
     super();
     this.state = {
       todos: [],
+      testProps: {},
       editItem: null
     };
   }
@@ -106,27 +107,36 @@ class App extends React.Component {
   }
 
   render() {
+
+    let todosProp = {
+      cancelEdit: this.cancelEdit,
+      editItem: this.state.editItem,
+      editTodo: this.editTodo,
+      updateTodo: this.updateTodo,
+      deleteTodo: this.deleteTodo,
+      todos: this.state.todos,
+      toggelComplete: this.toggelComplete,
+    }
+
     return (
       <div className="App">
         <Router>
-          <Headers />
-          <Route exact path="/react-todos/" render={(props) => (
-            <React.Fragment>
-              <AddTodo addTodo={this.addTodo} />
-              <div className="container">
-                <Todos
-                  cancelEdit={this.cancelEdit}
-                  editItem={this.state.editItem}
-                  editTodo={this.editTodo}
-                  updateTodo={this.updateTodo}
-                  deleteTodo={this.deleteTodo}
-                  todos={this.state.todos}
-                  toggelComplete={this.toggelComplete} />
-              </div>
-            </React.Fragment>
-          )} />
-          <Route path="/react-todos/about" component={About}/>
-          <Footer />
+          <Header />
+          <Switch>
+            <Route exact path="/react-todos/" render={(props) => (
+              <React.Fragment>
+                <AddTodo addTodo={this.addTodo} />
+                <div className="container">
+                  <Todos
+                    testProps={this.state.testProps}
+                    {...todosProp}
+                  />
+                </div>
+              </React.Fragment>
+            )} />
+            <Route path="/react-todos/about" component={About} />
+          </Switch>
+          <Footer content="Sample copyright content goes here." />
         </Router>
       </div>
     );

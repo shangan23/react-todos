@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Footer(){
+function Footer(props){
     return(
-        <div className="footer">Sample copyright content goes here.</div>
+        <div className="footer">{props.content}</div>
     );
 }
 
